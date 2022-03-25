@@ -1,0 +1,24 @@
+[
+  {
+    "entryPoint": ${jsonencode(entry_point)},
+
+    "environment": ${jsonencode(environment_vars)},
+
+    "mountPoints": ${jsonencode(mount_points)},
+
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+          "awslogs-group": "${container_name}",
+          "awslogs-region": "${aws_region}",
+          "awslogs-create-group": "true",
+          "awslogs-stream-prefix": "${cloudwatch_prefix}"
+      }
+    },
+
+    "image": "${image}",
+    "name": "${container_name}",
+
+    "portMappings": [{ "containerPort": ${container_port}, "hostPort": 0, "protocol": "tcp" }]
+  }
+]
